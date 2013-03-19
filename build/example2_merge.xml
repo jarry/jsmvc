@@ -1,0 +1,58 @@
+
+<project name="JSMVC example2 files merge" default="" basedir=".">
+	<property name="root-path" value="../" />
+	
+	<!-- 合并js文件 -->
+    <property name="js-src-path" value="${root-path}js-src" />
+	<!--merge reg.js-->
+	<target name="merge reg.js" depends="">	
+    	<echo message="merge reg.js start" />		
+        <concat destfile="${root-path}/example2/js/reg.js" encoding="gbk">          
+    		<fileset dir="${js-src-path}/example2/" includes="reg.action.js" />
+    		<fileset dir="${js-src-path}/example2/" includes="reg.class.js" />
+        </concat>        
+    	<echo message="merge reg.js finished" />		
+    </target> 
+	
+	<!--merge lib.js-->
+	<target name="merge lib.js" depends="merge reg.js">	
+    	<echo message="merge lib.js start" />		
+        <concat destfile="${root-path}/example2/js/lib/lib.js" encoding="gbk">   
+        	<fileset dir="${js-src-path}/lib/" includes="core.js" />
+        	<fileset dir="${js-src-path}/lib/" includes="event.js" />
+    		<fileset dir="${js-src-path}/lib/" includes="ajax.js" />
+        	<fileset dir="${js-src-path}/lib/" includes="class.js" />
+        	<fileset dir="${js-src-path}/lib/" includes="string.js" />
+        	<fileset dir="${js-src-path}/lib/" includes="element.js" />
+        	<fileset dir="${js-src-path}/lib/" includes="get-unique-id.js" />
+        	<fileset dir="${js-src-path}/ui/calendar/" includes="calendar.js" />
+        </concat>        
+    	<echo message="merge lib.js finished" />		
+    </target> 
+	
+	<!--merge com.js-->
+	<target name="merge com.js" depends="merge lib.js">	
+    	<echo message="merge com.js start" />		
+        <concat destfile="${root-path}/example2/js/com/com.js" encoding="gbk">          
+    		<fileset dir="${js-src-path}/example2/com/" includes="dom.js" />
+        	<fileset dir="${js-src-path}/example2/com/" includes="string.js" />
+        	<fileset dir="${js-src-path}/example2/com/" includes="validate.js" />
+        	<fileset dir="${js-src-path}/example2/com/" includes="error.js" />
+        </concat>
+    	<echo message="merge com.js finished" />		
+    </target> 
+
+
+   <!-- 分割线，合并css文件 -->	
+	<!--contact css -->
+    <property name="css-src-path" value="${root-path}css-src" />
+	<target name="merge reg.css" depends="merge com.js">	
+    	<echo message="merge reg.css start" />	
+        <concat destfile="${root-path}/example2/css/reg.css" encoding="gbk">
+        	<fileset dir="${css-src-path}/example2/" includes="reg.css" />
+        	<fileset dir="${css-src-path}/example2/" includes="calendar.css" />
+        </concat>
+    	<echo message="merge reg.css finished" />	
+    </target> 
+
+</project>

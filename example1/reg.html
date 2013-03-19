@@ -1,0 +1,33 @@
+<!doctype html> 
+<html> 
+<head> 
+<title>register - JS MVC Example</title> 
+</head> 
+<style> 
+.error{color:red;font-size:90%}
+body{padding:0 20% 0 20%;}
+</style> 
+<script type="text/javascript" src="js/lib/lib.js"></script>
+<script type="text/javascript" src="js/com/com.js"></script>
+<script type="text/javascript" src="js/reg.class.js"></script>
+<script type="text/javascript" src="js/reg.action.js"></script>
+
+<body> 
+<h3>表单验证采用JS MVC模式 实例</h3>
+以下各项都是必填：<hr/>
+<form name="regForm" method="post" action="javascript:alert('register success')">
+<span>姓名：</span><br/>
+	<input type="text" value="" size="15" name="name"/><cite>(限英文、数字以及汉字，且长度介于4-20字节之间)</cite><div id="errorName" class="error"></div><br/>
+
+<span>密码：</span><cite>(密码不少于6个字节)</cite><br/>
+	<input type="text" value="" size="15" name="password"/><div id="errorPassword"  class="error"></div><br/>
+<span>确认密码：</span><br/>
+	<input type="text" value="" size="15" name="rePassword"/><div id="errorRePassword"  class="error"></div><br/>
+
+<button type="submit">提交申请</button>
+<script>
+RegAction.init();
+</script>
+</form>
+<br/> 
+</body>

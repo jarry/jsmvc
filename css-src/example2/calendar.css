@@ -1,0 +1,31 @@
+/**
+ * calendar-wrap
+ * calendar-head
+ * calendar-prev-year
+ * calendar-prev-month
+ * calendar-title
+ * calendar-next-month
+ * calendar-next-year
+ * calendar-body
+ * calendar-today
+ * calendar-thismonth
+ * calendar-othermonth
+ */
+.calendar-wrap,.calendar-wrap td{font-size:12px;}
+
+.calendar-head{width:155px;height:23px;}
+.calendar-title{width:67px;height:21px;line-height:20px;float:left;color:#41537b;text-align:center;background:url(../img/calendar.gif) left bottom repeat-y;margin:0;}
+.calendar-prev-year,
+.calendar-next-year,
+.calendar-prev-month,
+.calendar-next-month{cursor:pointer;width:21px;height:21px;float:left;}
+.calendar-prev-year{background:url(../img/calendar.gif) 0 0 no-repeat;}
+.calendar-next-year{background:url(../img/calendar.gif) -63px 0 no-repeat;}
+.calendar-prev-month{background:url(../img/calendar.gif) -21px 0 no-repeat;margin-left:2px;}
+.calendar-next-month{background:url(../img/calendar.gif) -42px 0 no-repeat;margin-right:2px;}
+
+.calendar-body td{line-height:20px;text-align:center;width:22px;line-height:20px;}
+.calendar-body thead td{background:#f1f4f9;font-weight:bold;}
+.calendar-body tbody td{font-family:Arial;font-size:10px;cursor:pointer;}
+.calendar-today{color:white;background:#f9be24;}
+.calendar-othermonth{color:#999;}

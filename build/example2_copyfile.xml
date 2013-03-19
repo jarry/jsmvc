@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<project name="JSMVC example2 *.js.inc copy" default="" basedir=".">
+	<property name="root-path" value="../" />
+    <property name="js-src-path" value="${root-path}js-src" />
+	
+	   <target name="Copy example2/*.inc.js" depends="">	
+		<echo message="Copy *.js.inc File Begin" />
+	   	<!-- if the file exsiting delete first -->	   
+		<delete>
+			 <fileset dir="${root-path}/example2/js/" includes="reg.js"/>
+			 <fileset dir="${root-path}/example2/js/com/" includes="com.js"/>
+			 <fileset dir="${root-path}/example2/js/lib/" includes="lib.js"/>
+	   	</delete>
+		<copy todir="${root-path}/example2/js/">
+			<fileset dir="${js-src-path}/example2/" includes="reg.js.inc"></fileset>
+			<mapper type="glob" from="reg.js.inc" to="reg.js" />
+		</copy>
+		<copy todir="${root-path}/example2/js/com/">
+			<fileset dir="${js-src-path}/example2/com/" includes="com.js.inc"></fileset>
+			<mapper type="glob" from="com.js.inc" to="com.js" />
+		</copy>
+		<copy todir="${root-path}/example2/js/lib/">
+			<fileset dir="${js-src-path}/lib/" includes="lib.js.inc"></fileset>
+			<mapper type="glob" from="lib.js.inc" to="lib.js" />
+		</copy>
+		<echo message="Copy *.js.inc File Finished" />
+	   </target>
+ 
+      <property name="css-src-path" value="${root-path}css-src" />
+	   <target name="Copy example2/*.inc.css" depends="">	
+		<echo message="Copy *.css.inc File Begin" />
+	   	<!-- if the file exsiting delete first -->	   
+		<delete>
+			 <fileset dir="${root-path}/example2/css/" includes="reg.css"/>
+	   	</delete>
+		<copy todir="${root-path}/example2/css/">
+			<fileset dir="${css-src-path}/example2/" includes="reg.css.inc"></fileset>
+			<mapper type="glob" from="reg.css.inc" to="reg.css" />
+		</copy>
+		<echo message="Copy *.css.inc File Finished" />
+	   </target>
+
+</project>

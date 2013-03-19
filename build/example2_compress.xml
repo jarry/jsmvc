@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+process:
+	1. copy an empty directory to ${compile-path} from ${js-path}
+	2. compress **/*.js ${compile-path} under, output ${compile-path}.The *.js changed name to *-min.js
+	3. move **/*-min.js ${compile-path} under to ${js-path}, overlay the **/*.js.
+	4. delete the ${compile-path} directory;
+	
+	CSS files method like this
+
+mail: JarryLi@gmail.com	
+-->
+<project name="JSMVC example2 files compress" default="" basedir=".">
+	<property name="root-path" value="../example2/" />
+    <property name="js-src-path" value="${root-path}js-src" />
+    <property name="js-path" value="${root-path}js" />
+    
+    <property name="yuicompressor" value="tools/yuicompressor-2.4.2.jar" />
+	<property name="webpacker" value="tools/webpacker.jar" />
+
+ 
+    <property name="compile-path" value="tmp" />
+	
+	<!--	// compress js	-->
+	<target name="Compress JS" depends="">
+			<echo message="Copy JS files Begin" />
+			<!--
+			 create ${compile-path} directory.
+			 copy all sub directory and js files to the directory from  ${js-path}.
+			 -->
+			<mkdir dir="${compile-path}" />	
+			<copy todir="${compile-path}">
+		  		<fileset dir="${js-path}">
+		  			<!--<include name="**/*.js" />-->
+		  			<!-- copy js files only -->
+		  			<exclude name="**/*.*"/>
+		  			<!-- copy folders only -->
+		  			
+		  		</fileset>
+			</copy>
+			<echo message="Copy JS files Finished" />
+			
+			<echo message="Compress Code Begin" />
+	    	<apply executable="java" parallel="false" failonerror="true" dest="${compile-path}">
+	    		<fileset dir="${js-path}" includes="**/*.js" />
+	    		<arg line="-jar"/>
+	    		<arg path="${webpacker}" />
+	    		<arg line="--charset gbk" /> 
+	    		<!--
+	    		<arg line="- -type js" />
+	    		 arg line="- -type js" add type for yuicompressor-->
+	    		<!--
+	    		<arg line="- - mode 1" />
+	    		 -->
+	    		<!--compress mode for webpacker-->
+	    		
+	    		<arg line="-o" />
+	    		<targetfile/>
+	    		<mapper type="glob" from="*.js" to="*-min.js" />
+	    	</apply>
+	    	<echo message="Compress Code Finished" />
+	    		
+			<!-- move all js files to ${js-path} from ${compile-path} -->
+			<echo message="Copy compress files Begin" />
+			<move todir="${js-path}">
+			<fileset dir="${compile-path}">
+				<include name="**/*.js"/>
+			</fileset>
+			<mapper type="glob" from="*-min.js" to="*.js"/>
+			</move>	
+			
+			<!-- delete the ${compile-path} directory trees -->
+			<!--<delete dir="${compile-path}"/>-->
+			
+	    	<echo message="Copy compress JS files Finished" /> 
+
+	</target>
+	
+	<!--	// compress css	-->
+	
+    <property name="css-src-path" value="${root-path}css-src" />
+	<property name="css-path" value="${root-path}css"/>
+	<target name="Compress CSS" depends="">
+			<echo message="Copy CSS files Begin" />
+			<!--
+			 create ${compile-path} directory.
+			 copy all sub directory and css files to the directory from  ${css-path}.
+			 -->
+			<mkdir dir="${compile-path}" />	
+			<copy todir="${compile-path}">
+		  		<fileset dir="${css-path}">
+
+		  			<exclude name="**/*.*"/>
+		  			<!-- copy folders only -->
+		  			
+		  		</fileset>
+			</copy>
+			<echo message="Copy CSS files Finished" />
+			
+			<echo message="Compress Code Begin" />
+	    	<apply executable="java" parallel="false" failonerror="true" dest="${compile-path}">
+	    		<fileset dir="${css-path}" includes="**/*.css" />
+	    		<arg line="-jar"/>
+	    		<arg path="${yuicompressor}" />
+	    		<arg line="--charset gbk" /> 
+	    		<arg line="--type css" />
+	    		<arg line="-o" />
+	    		<targetfile/>
+	    		<mapper type="glob" from="*.css" to="*-min.css" />
+	    	</apply>
+	    	<echo message="Compress Code Finished" />
+	    		
+		<!-- move all css files to ${css-path} from ${compile-path} -->
+		<echo message="Copy compress files Begin" />
+		<move todir="${css-path}">
+		<fileset dir="${compile-path}">
+			<include name="**/*.css"/>
+		</fileset>
+		<mapper type="glob" from="*-min.css" to="*.css"/>
+		</move>		
+	<!-- delete the ${compile-path} directory trees -->
+		<delete dir="${compile-path}"/>
+	    <echo message="Copy compress css files Finished" /> 
+	</target>
+	
+	
+	
+</project>

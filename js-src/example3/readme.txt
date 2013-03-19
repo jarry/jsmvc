@@ -1,0 +1,2 @@
+- 待续(be continued)
+- 与example2共用lib库与ui组件等

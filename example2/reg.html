@@ -1,0 +1,46 @@
+<!doctype html> 
+<html> 
+<head> 
+<title>register - JS MVC Example</title> 
+</head> 
+
+<link href="css/reg.css" rel="stylesheet" type="text/css" />
+<script type="text/javascript" src="js/lib/lib.js"></script>
+<script type="text/javascript" src="js/com/com.js"></script>
+<script type="text/javascript" src="js/reg.js"></script>
+
+<body> 
+<div class="main">
+	<h3>表单验证采用JS MVC模式 实例</h3>
+	以下各项都是必填：<hr/>
+	<form name="regForm" method="post" action="reg.php?action=reg">
+	<span>姓名：</span><br/>
+		<input type="text" size="15" name="name"/><button type="button" id="checkUserName">检测用户名</button><cite>(限英文、数字以及汉字，且长度介于4-20字节之间)</cite><div id="errorName" class="error"><?php echo $ERRORS_REG['name'];?></div><br/>
+	<span>性别：</span><br/>
+
+	<label><input type="radio" value="male" name="gender" />男</label>&nbsp;&nbsp;&nbsp;&nbsp;<label><input selected type="radio" name="gender" value="female" />女</label>
+		<div id="errorGender"  class="error"><?php echo $ERRORS_REG['gender'];?></div><br/>
+	<span>出生日期：</span><br/>
+		<input type="text" size="15" name="birthday" id="birthdayInput" autocomplete="off" /><img id="calenderSelector" src="img/icon_calendar.gif" align="absmiddle"/>
+		<div id="calendarWrap" class="birthday-calendar"></div>	
+		<div id="errorBirthday"  class="error"><?php echo $ERRORS_REG['birthday'];?></div><br/>
+	<span>密码：</span><cite>(密码不少于6个字节)</cite><br/>
+		<input type="text" value="" size="15" name="password"/>
+		<div id="errorPassword"  class="error"><?php echo $ERRORS_REG['password'];?></div><br/>
+	<span>确认密码：</span><br/>
+		<input type="text" value="" size="15" name="rePassword"/>
+		<div id="errorRePassword"  class="error"><?php echo $ERRORS_REG['rePassword'];?></div><br/>
+
+	<button type="submit">提交申请</button>
+	<script>
+	RegAction.init();
+	</script>
+	<?php
+	// 用php输出js来回填信息，因本页面仍使用html，打开直接就能查看
+	echo $tmp_FILL_REG_INFO;
+	?>
+
+</form>
+</div> 
+</body>
+</html>
